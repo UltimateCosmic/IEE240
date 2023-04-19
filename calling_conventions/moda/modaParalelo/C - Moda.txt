@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//CUANDO EL VALOR RETORNA DESDE PUNTERO SALE DESDE LA PILA
+//CUANDO LA FUNCION NO ES VOID, RETORNA POR RAX
+
+//extern void suma(int a, int b, int c, int *d);
+//extern int suma(int a, int b, int c);
+extern int moda(int arr[], int N);
+
+int main(){
+    
+    int arr[5] = {4,3,3,3,4};
+    int i, resultado;
+
+    resultado = moda(arr,5);
+    
+    printf("La moda es: %d\n", resultado);
+
+    return 0;
+}
+
+/*
+void suma(int a, int b, int c, int *d){
+    *d = a + b + c;
+}
+*/

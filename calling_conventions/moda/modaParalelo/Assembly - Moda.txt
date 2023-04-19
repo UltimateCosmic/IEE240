@@ -1,0 +1,49 @@
+    global moda
+    section .text   
+
+; rdi tiene el arreglo
+; rsi tiene la cantidad
+
+moda:
+    xor r9, r9        ; valor actual de i
+    xor r10, r10      ; valor actual de j
+    xor r11, r11      ; valor de suma temporal
+    xor r12, r12      ; valor máximo de suma
+    xor r13, r13      ; valor temporal de moda
+
+bucle_exterior:
+    cmp r9, rsi
+    je final
+
+    mov r10, r9      ; El segundo ciclo comienza en la posición actual de i
+    inc r10
+
+bucle_interior:
+    cmp r10, rsi
+    je actualizar
+
+    mov eax, [rdi + 4 * r9]
+    mov ebx, [rdi + 4 * r10]
+    cmp eax, ebx
+    jne incrementar_j
+    add r11, 1
+    jmp incrementar_j
+
+incrementar_j:
+    inc r10
+    jmp bucle_interior
+
+actualizar:
+    cmp r12, r11
+    jg incrementar_i
+    mov r12, r11
+    mov r13, [rdi + 4 * r9]
+
+incrementar_i:
+    inc r9
+    xor r11, r11
+    jmp bucle_exterior
+
+final:
+    mov rax, r13
+    ret
